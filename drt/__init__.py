@@ -3,4 +3,9 @@
 Reverse ETL for the code-first data stack.
 """
 
-__version__ = "0.1.0.dev0"
+from importlib.metadata import PackageNotFoundError, version
+
+try:
+    __version__ = version("drt-core")
+except PackageNotFoundError:
+    __version__ = "0.0.0+unknown"
