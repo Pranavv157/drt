@@ -1,14 +1,16 @@
 name: Feature Request
 description: Suggest a new connector, command, or capability
-labels: ["enhancement"]
+labels: ["feat"]
 body:
   - type: textarea
     id: problem
     attributes:
       label: What problem does this solve?
       description: Describe the use case or pain point.
+      placeholder: "e.g. I need to sync data to Salesforce but there's no connector yet."
     validations:
       required: true
+
   - type: textarea
     id: solution
     attributes:
@@ -16,6 +18,7 @@ body:
       description: What would you like drt to do?
     validations:
       required: true
+
   - type: dropdown
     id: category
     attributes:
@@ -24,8 +27,17 @@ body:
         - New source connector
         - New destination connector
         - CLI command
+        - Incremental sync / state
         - Performance
         - LLM / MCP integration
+        - Orchestration (Dagster, Airflow)
         - Other
     validations:
       required: true
+
+  - type: textarea
+    id: yaml-example
+    attributes:
+      label: Example YAML (if applicable)
+      description: Show what the config would look like.
+      render: yaml

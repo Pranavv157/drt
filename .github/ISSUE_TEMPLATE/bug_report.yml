@@ -2,20 +2,19 @@ name: Bug Report
 description: Something isn't working as expected
 labels: ["bug"]
 body:
-  - type: input
-    id: version
+  - type: markdown
     attributes:
-      label: drt version
-      placeholder: "e.g. 0.1.0"
-    validations:
-      required: true
+      value: Thanks for reporting a bug! Please fill in as much detail as possible.
+
   - type: textarea
     id: description
     attributes:
       label: What happened?
       description: A clear description of the bug.
+      placeholder: "e.g. `drt run` exits with an unexpected error when..."
     validations:
       required: true
+
   - type: textarea
     id: reproduce
     attributes:
@@ -25,14 +24,49 @@ body:
         2. ...
     validations:
       required: true
+
   - type: textarea
     id: expected
     attributes:
       label: Expected behavior
     validations:
       required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error output / logs
+      description: Paste any relevant error messages.
+      render: text
+
   - type: textarea
     id: config
     attributes:
       label: Relevant sync YAML (redact secrets)
       render: yaml
+
+  - type: input
+    id: version
+    attributes:
+      label: drt version
+      description: Output of `drt --version`
+      placeholder: "drt version 0.1.1"
+    validations:
+      required: true
+
+  - type: input
+    id: python
+    attributes:
+      label: Python version
+      description: Output of `python --version`
+      placeholder: "Python 3.11.0"
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: OS
+      placeholder: "macOS 14.0 / Ubuntu 22.04 / Windows 11"
+    validations:
+      required: true
