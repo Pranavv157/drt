@@ -36,6 +36,12 @@ body:
       required: true
 
   - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: What workarounds or other tools have you tried?
+
+  - type: textarea
     id: yaml-example
     attributes:
       label: Example YAML (if applicable)
