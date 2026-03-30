@@ -257,7 +257,6 @@ def _get_source(
     from drt.sources.bigquery import BigQuerySource
     from drt.sources.duckdb import DuckDBSource
     from drt.sources.postgres import PostgresSource
-    from drt.sources.redshift import RedshiftSource
 
     if isinstance(profile, BigQueryProfile):
         return BigQuerySource()
@@ -266,6 +265,8 @@ def _get_source(
     if isinstance(profile, PostgresProfile):
         return PostgresSource()
     if isinstance(profile, RedshiftProfile):
+        from drt.sources.redshift import RedshiftSource
+
         return RedshiftSource()
     raise ValueError(f"Unsupported source type: {type(profile)}")
 
