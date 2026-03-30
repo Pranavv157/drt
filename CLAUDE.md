@@ -50,7 +50,7 @@ make fmt      # ruff format + fix
 
 ## Current Status
 
-- **v0.3.2 released** — MCP Server, AI Skills (plugin marketplace), LLM docs, row-level errors, BigQuery location support
+- **v0.3.3 released** — MCP Server, AI Skills (plugin marketplace), LLM docs, row-level errors, BigQuery location support
 - CLI fully wired: `init`, `run`, `list`, `validate`, `status`, `mcp run`
 - Sources: BigQuery, DuckDB, PostgreSQL
 - Destinations: REST API, Slack, GitHub Actions, HubSpot

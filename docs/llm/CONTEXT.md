@@ -136,8 +136,11 @@ Slash command versions also available in `.claude/commands/` for manual installa
 
 **Incremental sync**: Extract only new/updated rows using a watermark column.
 - Set `sync.mode: incremental` and `sync.cursor_field: <column>`
+- `cursor_field` is **required** when `mode: incremental` — omitting it raises a validation error
+- `cursor_field` must be a valid SQL identifier (letters, digits, underscores, dots only)
 - drt saves `last_cursor_value` in `.drt/state.json` after each run
 - Next run automatically injects `WHERE <cursor_field> > '<last_value>'`
+- Cursor comparison uses numeric ordering when possible (handles integer/float cursors correctly)
 
 ### Model Reference
 
