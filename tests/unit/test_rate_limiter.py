@@ -107,6 +107,18 @@ class TestRapidSuccessiveCalls:
             assert abs(call[0][0] - 0.5) < 1e-9
 
 
+class TestFractionalRps:
+    @patch("drt.destinations.rate_limiter.time.sleep")
+    @patch("drt.destinations.rate_limiter.time.monotonic")
+    def test_fractional_rps(self, mock_mono, mock_sleep) -> None:
+        """Ensure fractional requests_per_second behaves correctly."""
+        mock_mono.return_value = 100.0
+        rl = _make_limiter(2.5)  # interval = 0.4 seconds
+        rl.acquire()
+        rl.acquire()
+        mock_sleep.assert_called_once_with(0.4)
+
+
 class TestStateManagement:
     @patch("drt.destinations.rate_limiter.time.sleep")
     @patch("drt.destinations.rate_limiter.time.monotonic")
