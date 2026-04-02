@@ -69,10 +69,12 @@ class TestRpsOne:
     @patch("drt.destinations.rate_limiter.time.monotonic")
     def test_rps_one_no_sleep_after_interval(self, mock_mono, mock_sleep) -> None:
         call_count = 0
+
         def advancing_clock():
             nonlocal call_count
             call_count += 1
             return 100.0 if call_count <= 2 else 101.5
+
         mock_mono.side_effect = advancing_clock
         rl = _make_limiter(1)
         rl.acquire()
