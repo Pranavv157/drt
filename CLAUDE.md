@@ -72,8 +72,10 @@ make fmt      # ruff format + fix
 - v0.2 ✅: Incremental sync + retry from config
 - v0.3 ✅: MCP Server + AI Skills for Claude Code + LLM-readable docs + row-level errors + security hardening + Redshift source
 - v0.4 ✅: Google Sheets / PostgreSQL / MySQL destinations + dagster-drt + dbt manifest reader + type safety overhaul
-- [v0.5](https://github.com/drt-hub/drt/milestone/2): Snowflake source + CSV/JSON destination + test coverage
-- [v0.6](https://github.com/drt-hub/drt/milestone/3): Salesforce destination + Airflow integration
+- [v0.5](https://github.com/drt-hub/drt/milestone/2): Snowflake source + CSV/JSON + Parquet destinations + test coverage + Docker
+- [v0.6](https://github.com/drt-hub/drt/milestone/3): Salesforce + Airflow integration + Jira / Twilio / Intercom destinations
+- [v0.7](https://github.com/drt-hub/drt/milestone/4): DWH destinations (Snowflake / BigQuery / ClickHouse / Databricks) + Cloud storage (S3 / GCS / Azure Blob)
+- [v0.8](https://github.com/drt-hub/drt/milestone/5): Lakehouse sources (Delta Lake / Apache Iceberg)
 - v1.x: Rust engine via PyO3
 
 **Good First Issues:** https://github.com/drt-hub/drt/issues?q=is%3Aopen+label%3A%22good+first+issue%22
