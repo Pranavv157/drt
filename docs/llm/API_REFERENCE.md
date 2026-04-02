@@ -18,7 +18,7 @@ profile: default          # optional, default: "default" — maps to ~/.drt/prof
 
 ```yaml
 default:
-  type: bigquery            # "bigquery" | "duckdb" | "postgres" | "redshift"
+  type: bigquery            # "bigquery" | "duckdb" | "sqlite" | "postgres" | "redshift"
   project: my-gcp-project   # BigQuery: GCP project ID
   dataset: analytics        # BigQuery: dataset name
   location: US              # optional: "US" (default), "EU", "asia-northeast1", etc.
@@ -30,6 +30,11 @@ duckdb_local:
   type: duckdb
   database: ./data/local.duckdb
   dataset: main
+
+# SQLite example:
+sqlite_local:
+  type: sqlite
+  database: ./data/local.db     # path to .sqlite/.db file, or ":memory:"
 
 # PostgreSQL example:
 prod_pg:
@@ -120,6 +125,32 @@ Block Kit example:
         {
           "type": "section",
           "text": {"type": "mrkdwn", "text": "*New user:* {{ row.name }}"}
+        }
+      ]
+    }
+```
+
+### `type: discord`
+
+```yaml
+destination:
+  type: discord
+  webhook_url: "https://discord.com/api/webhooks/..."  # provide webhook_url OR webhook_url_env
+  webhook_url_env: DISCORD_WEBHOOK_URL                 # env var name
+  message_template: "New user: {{ row.name }} ({{ row.email }})"  # Jinja2, default: "{{ row }}"
+  embeds: false                                        # true = message_template is embeds JSON
+```
+
+Embeds example:
+```yaml
+  embeds: true
+  message_template: |
+    {
+      "embeds": [
+        {
+          "title": "{{ row.title }}",
+          "description": "{{ row.description }}",
+          "color": 3447003
         }
       ]
     }
@@ -292,6 +323,27 @@ destination:
   type: slack
   webhook_url_env: SLACK_WEBHOOK_URL
   message_template: ":wave: New user: *{{ row.name }}* ({{ row.email }})"
+
+sync:
+  mode: incremental
+  cursor_field: created_at
+  batch_size: 50
+  on_error: skip
+  rate_limit:
+    requests_per_second: 5
+```
+
+### Discord notification — incremental
+
+```yaml
+name: new_order_discord
+description: "Notify Discord when new orders arrive"
+model: ref('orders')
+
+destination:
+  type: discord
+  webhook_url_env: DISCORD_WEBHOOK_URL
+  message_template: ":package: New order #{{ row.order_id }} from {{ row.customer_name }} (${{ row.total }})"
 
 sync:
   mode: incremental
