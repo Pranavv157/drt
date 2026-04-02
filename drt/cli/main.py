@@ -17,6 +17,7 @@ if TYPE_CHECKING:
         SQLiteProfile,
     )
     from drt.config.models import SyncConfig
+    from drt.destinations.discord import DiscordDestination
     from drt.destinations.github_actions import GitHubActionsDestination
     from drt.destinations.google_sheets import GoogleSheetsDestination
     from drt.destinations.hubspot import HubSpotDestination
@@ -291,6 +292,7 @@ def _get_destination(
 ) -> (
     RestApiDestination
     | SlackDestination
+    | DiscordDestination
     | GitHubActionsDestination
     | HubSpotDestination
     | GoogleSheetsDestination
@@ -298,6 +300,7 @@ def _get_destination(
     | MySQLDestination
 ):
     from drt.config.models import (
+        DiscordDestinationConfig,
         GitHubActionsDestinationConfig,
         GoogleSheetsDestinationConfig,
         HubSpotDestinationConfig,
@@ -306,6 +309,7 @@ def _get_destination(
         RestApiDestinationConfig,
         SlackDestinationConfig,
     )
+    from drt.destinations.discord import DiscordDestination
     from drt.destinations.github_actions import GitHubActionsDestination
     from drt.destinations.hubspot import HubSpotDestination
     from drt.destinations.mysql import MySQLDestination
@@ -318,6 +322,8 @@ def _get_destination(
         return RestApiDestination()
     if isinstance(dest, SlackDestinationConfig):
         return SlackDestination()
+    if isinstance(dest, DiscordDestinationConfig):
+        return DiscordDestination()
     if isinstance(dest, GitHubActionsDestinationConfig):
         return GitHubActionsDestination()
     if isinstance(dest, HubSpotDestinationConfig):
