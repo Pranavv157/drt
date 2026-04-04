@@ -49,4 +49,13 @@ Check that all documentation and version references are consistent before a dags
 
 9. **i18n sync** — run `make check-i18n` and verify README.ja.md is in sync
 
+10. **GitHub Release** — create (or verify exists):
+    - `gh release create dagster-drt-v{VERSION} --latest=false` with title `dagster-drt v{VERSION}`
+    - **MUST pass `--latest=false`** — otherwise it steals Latest from drt-core
+    - Include migration guide if breaking changes
+
+11. **Verify Latest flag** — after release:
+    - `gh release list --limit 5` — confirm drt-core shows `Latest`, dagster-drt does not
+    - If wrong: `gh release edit dagster-drt-v{VERSION} --latest=false && gh release edit v{CORE_VERSION} --latest`
+
 Report any inconsistencies found and suggest fixes.
