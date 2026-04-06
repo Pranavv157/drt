@@ -191,6 +191,12 @@ class MySQLDestinationConfig(BaseModel):
         return self
 
 
+class FileDestinationConfig(BaseModel):
+    type: Literal["file"]
+    path: str  # output file path, e.g. "output/data.csv"
+    format: Literal["csv", "json", "jsonl"] = "csv"
+
+
 # Discriminated union — add new destination types here
 DestinationConfig = Annotated[
     RestApiDestinationConfig
@@ -200,7 +206,8 @@ DestinationConfig = Annotated[
     | HubSpotDestinationConfig
     | GoogleSheetsDestinationConfig
     | PostgresDestinationConfig
-    | MySQLDestinationConfig,
+    | MySQLDestinationConfig
+    | FileDestinationConfig,
     Field(discriminator="type"),
 ]
 
