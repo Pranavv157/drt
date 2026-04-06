@@ -21,6 +21,7 @@ if TYPE_CHECKING:
     from drt.config.models import SyncConfig
     from drt.destinations.clickhouse import ClickHouseDestination
     from drt.destinations.discord import DiscordDestination
+    from drt.destinations.file import FileDestination
     from drt.destinations.github_actions import GitHubActionsDestination
     from drt.destinations.google_sheets import GoogleSheetsDestination
     from drt.destinations.hubspot import HubSpotDestination
@@ -334,10 +335,12 @@ def _get_destination(
     | TeamsDestination
     | ClickHouseDestination
     | ParquetDestination
+    | FileDestination
 ):
     from drt.config.models import (
         ClickHouseDestinationConfig,
         DiscordDestinationConfig,
+        FileDestinationConfig,
         GitHubActionsDestinationConfig,
         GoogleSheetsDestinationConfig,
         HubSpotDestinationConfig,
@@ -386,4 +389,8 @@ def _get_destination(
         from drt.destinations.parquet import ParquetDestination
 
         return ParquetDestination()
+    if isinstance(dest, FileDestinationConfig):
+        from drt.destinations.file import FileDestination
+
+        return FileDestination()
     raise ValueError(f"Unsupported destination type: {dest.type}")

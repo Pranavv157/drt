@@ -238,6 +238,12 @@ class ParquetDestinationConfig(BaseModel):
     compression: Literal["snappy", "gzip", "zstd", "none"] = "snappy"
 
 
+class FileDestinationConfig(BaseModel):
+    type: Literal["file"]
+    path: str  # output file path, e.g. "output/data.csv"
+    format: Literal["csv", "json", "jsonl"] = "csv"
+
+
 # Discriminated union — add new destination types here
 DestinationConfig = Annotated[
     RestApiDestinationConfig
@@ -250,7 +256,8 @@ DestinationConfig = Annotated[
     | MySQLDestinationConfig
     | TeamsDestinationConfig
     | ClickHouseDestinationConfig
-    | ParquetDestinationConfig,
+    | ParquetDestinationConfig
+    | FileDestinationConfig,
     Field(discriminator="type"),
 ]
 
