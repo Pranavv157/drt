@@ -214,6 +214,7 @@ class ClickHouseDestinationConfig(BaseModel):
     password: str | None = None
     password_env: str | None = None
     table: str  # unqualified table name (database set via database/database_env)
+
     # Informational only for ClickHouse. drt does not enforce/create
     # ReplacingMergeTree tables or apply upsert semantics from this field.
     upsert_key: list[str] | None = None
@@ -228,7 +229,13 @@ class ClickHouseDestinationConfig(BaseModel):
         if not self.database and not self.database_env:
             raise ValueError("Either database, database_env, or connection_string_env is required.")
         return self
->>>>>>> pr-199
+
+
+class ParquetDestinationConfig(BaseModel):
+    type: Literal["parquet"]
+    path: str  # output file or directory path, e.g. "output/data.parquet"
+    partition_by: list[str] | None = None  # optional partition columns
+    compression: Literal["snappy", "gzip", "zstd", "none"] = "snappy"
 
 
 # Discriminated union — add new destination types here
@@ -242,7 +249,8 @@ DestinationConfig = Annotated[
     | PostgresDestinationConfig
     | MySQLDestinationConfig
     | TeamsDestinationConfig
-    | ClickHouseDestinationConfig,
+    | ClickHouseDestinationConfig
+    | ParquetDestinationConfig,
     Field(discriminator="type"),
 ]
 

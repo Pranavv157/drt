@@ -40,6 +40,7 @@ clickhouse = ["clickhouse-connect>=0.7.0"]
 snowflake = ["snowflake-connector-python>=3.0"]
 sheets = ["google-api-python-client>=2.0", "google-auth>=2.0"]
 mysql = ["pymysql>=1.1"]
+parquet = ["pandas>=2.0", "pyarrow>=12.0"]
 mcp = ["fastmcp>=2.0"]
 dev = [
     "pytest>=8.0",
