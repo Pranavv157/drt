@@ -6,4 +6,4 @@ SELECT
     created_at
 FROM orders
 WHERE amount > 1000
-ORDER BY created_at DESC
+ORDER BY created_at ASC

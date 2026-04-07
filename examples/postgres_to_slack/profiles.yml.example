@@ -1,0 +1,8 @@
+# Copy to ~/.drt/profiles.yml and fill in your values
+postgres_prod:
+  type: postgres
+  host: localhost
+  port: 5432
+  database: mydb
+  user: myuser
+  password_env: POSTGRES_PASSWORD   # or use password: directly

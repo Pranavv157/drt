@@ -11,6 +11,7 @@ Ready-to-run drt configurations. Each directory is a self-contained project.
 | [bigquery_to_github_actions](./bigquery_to_github_actions/) | BigQuery | GitHub Actions | Trigger workflows from query results |
 | [duckdb_to_google_sheets](./duckdb_to_google_sheets/) | DuckDB | Google Sheets | Requires GCP service account |
 | [sqlite_to_google_sheets](./sqlite_to_google_sheets/) | SQLite | Google Sheets | Requires GCP service account |
+| [postgres_to_slack](./postgres_to_slack/) | PostgreSQL | Slack | Incremental sync, requires `SLACK_WEBHOOK_URL` |
 
 Start with `quickstart/` if you are new to drt — it requires no cloud accounts and
 runs end-to-end in about 5 minutes.
